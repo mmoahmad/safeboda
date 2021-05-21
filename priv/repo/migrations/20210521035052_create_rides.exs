@@ -2,6 +2,7 @@ defmodule Safeboda.Repo.Migrations.CreateRides do
   use Ecto.Migration
 
   def change do
+    Safeboda.RideStatus.create_type()
     create table(:rides) do
       add :pick_up_latitude, :string
       add :pick_up_longitude, :string

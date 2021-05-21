@@ -12,7 +12,7 @@ defmodule SafebodaWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
-    plug :basic_auth, Application.compile_env(:safeboda, :basic_auth)
+    # plug :basic_auth, Application.compile_env(:safeboda, :basic_auth)
   end
 
   scope "/", SafebodaWeb do
@@ -39,6 +39,13 @@ defmodule SafebodaWeb.Router do
     scope "/" do
       pipe_through :browser
       live_dashboard "/dashboard", metrics: SafebodaWeb.Telemetry
+    end
+
+    scope "/api/v1", SafebodaWeb do
+      pipe_through :api
+
+      post("/driver", DriverController, :create)
+      post("/driver/:driverid/suspend", DriverController, :suspend)
     end
   end
 end
