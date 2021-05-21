@@ -1,5 +1,6 @@
 defmodule SafebodaWeb.Router do
   use SafebodaWeb, :router
+  import Plug.BasicAuth
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -11,6 +12,7 @@ defmodule SafebodaWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug :basic_auth, Application.compile_env(:safeboda, :basic_auth)
   end
 
   scope "/", SafebodaWeb do
