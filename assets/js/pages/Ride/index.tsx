@@ -11,6 +11,7 @@ import NoDataIndication from '../../components/NoDataIndication';
 import { Alert } from 'react-bootstrap';
 import { BorderedButton } from '../../elements/Button';
 import haversine from 'haversine-distance';
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import CreateRide from './CreateRide';
 
 const { SearchBar, ClearSearchButton } = Search;
@@ -26,23 +27,19 @@ const Rides: FunctionComponent<IRides> = ({ getRides, stopRide }) => {
   const [showError, setShowError] = useState(false);
   const [showRideModal, setShowRideModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
-
-  const getDistanceData = (rides: any) => {
-    (rides || []).map((v: any) => {
-      const pickup = [v.pick_up_latitude, v.pick_up_longitude];
-      const destination = [v.destination_latitude, v.destination_longitude];
-      let distance = haversine(pickup, destination);
-      console.log(distance)
-    })
-  }
+  const [rideChart, setRideChart] = useState([]);
 
   const getRidesData = () => {
     setIsLoading(true);
     getRides()
       .then((resp: any) => {
         setRides(resp.rides);
-        getDistanceData(resp.rides);
+        setRideChart((resp.rides || []).map((v: any) => {
+          const pickup = [v.pickUpLatitude, v.pickUpLongitude];
+          const destination = [v.destinationLatitude, v.destinationLongitude];
+          let distance = (haversine(pickup, destination) / 1000).toFixed(1);
+          return { name: `Ride ID: ${v.id}`, distance: distance }
+        }));
         setIsLoading(false);
       })
       .catch((err: any) => {
@@ -68,30 +65,6 @@ const Rides: FunctionComponent<IRides> = ({ getRides, stopRide }) => {
       });
   }
 
-  function getDistance(pick_up_latitude: any, pick_up_longitude: any, destination_latitude: any, destination_longitude: any) {
-    if ((pick_up_latitude == destination_latitude) && (pick_up_longitude == destination_longitude)) {
-      return 0;
-    }
-    else {
-      const radpick_up_latitude = Math.PI * pick_up_latitude / 180;
-      const raddestination_latitude = Math.PI * destination_latitude / 180;
-      const theta = pick_up_longitude - destination_longitude;
-      const radtheta = Math.PI * theta / 180;
-      let dist = Math.sin(radpick_up_latitude) * Math.sin(raddestination_latitude) + Math.cos(radpick_up_latitude) * Math.cos(raddestination_latitude) * Math.cos(radtheta);
-      if (dist > 1) {
-        dist = 1;
-      }
-      dist = Math.acos(dist);
-      console.log(dist)
-      dist = dist * 180 / Math.PI;
-      dist = dist * 60 * 1.1515;
-      dist = dist * 1.609344
-      return dist;
-    }
-  }
-
-  // useEffect(getDistanceData)
-
   function getRidesTableColumns() {
     return [
       {
@@ -102,13 +75,15 @@ const Rides: FunctionComponent<IRides> = ({ getRides, stopRide }) => {
       },
       {
         dataField: 'passengerId',
-        text: 'Passenger ID',
-        sort: true
+        text: 'Passenger',
+        sort: true,
+        formatter: (col: any, { passenger }: any) => passenger.name
       },
       {
         dataField: 'driverId',
-        text: 'Driver ID',
-        sort: true
+        text: 'Driver',
+        sort: true,
+        formatter: (col: any, { driver }: any) => driver.name
       },
       {
         dataField: 'status',
@@ -179,6 +154,26 @@ const Rides: FunctionComponent<IRides> = ({ getRides, stopRide }) => {
         closeRideModal={() => setShowRideModal(false)}
         getRidesData={getRidesData}
       />
+
+      <h4>Rides' Distance</h4>
+        <BarChart
+          width={1100}
+          height={400}
+          data={rideChart}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="distance" fill="#8884d8" />
+        </BarChart>
     </ErrorBoundary>
   );
 };

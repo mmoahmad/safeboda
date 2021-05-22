@@ -100,6 +100,7 @@ const CreateRide: FunctionComponent<ICreateRide> = ({ createRide, closeRideModal
         setIsLoading(false);
         setShow(true);
         handleErrorMsg(errorNotification);
+        handleSubmission(false);
         return err;
       });
   };
