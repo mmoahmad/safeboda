@@ -74,13 +74,13 @@ const Rides: FunctionComponent<IRides> = ({ getRides, stopRide }) => {
         headerClasses: 'userid-header-class'
       },
       {
-        dataField: 'passengerId',
+        dataField: 'passenger.name',
         text: 'Passenger',
         sort: true,
         formatter: (col: any, { passenger }: any) => passenger.name
       },
       {
-        dataField: 'driverId',
+        dataField: 'driver.name',
         text: 'Driver',
         sort: true,
         formatter: (col: any, { driver }: any) => driver.name
