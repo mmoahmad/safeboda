@@ -3,10 +3,10 @@ defmodule Safeboda.Accounts.Ride do
   import Ecto.Changeset
 
   schema "rides" do
-    field :pick_up_latitude, :string
-    field :pick_up_longitude, :string
-    field :destination_latitude, :string
-    field :destination_longitude, :string
+    field :pick_up_latitude, :decimal
+    field :pick_up_longitude, :decimal
+    field :destination_latitude, :decimal
+    field :destination_longitude, :decimal
     field :status
 
     belongs_to :driver, Safeboda.Accounts.Driver
@@ -53,20 +53,12 @@ defmodule Safeboda.Accounts.Ride do
         id: id,
         driver_id: driver_id,
         passenger_id: passenger_id,
-        pick_up_latitude: pick_up_latitude,
-        pick_up_longitude: pick_up_longitude,
-        destination_latitude: destination_latitude,
-        destination_longitude: destination_longitude,
         status: status
       }) do
     %{
       id: id,
       driverId: driver_id,
       passengerId: passenger_id,
-      pickUpLatitude: pick_up_latitude,
-      pickUpLongitude: pick_up_longitude,
-      destinationLatitude: destination_latitude,
-      destinationLongitude: destination_longitude,
       status: status
     }
   end

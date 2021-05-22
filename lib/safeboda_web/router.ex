@@ -44,8 +44,20 @@ defmodule SafebodaWeb.Router do
     scope "/api", SafebodaWeb do
       pipe_through :api
 
+      # driver routes
+      get("/drivers", DriverController, :index)
       post("/driver", DriverController, :create)
       post("/driver/:driverid/suspend", DriverController, :suspend)
+      delete("/driver/:driverid/suspend", DriverController, :unsuspend)
+
+      # passenger route
+      get("/passengers", PassengerController, :index)
+      post("/passenger", PassengerController, :create)
+
+      # ride routes
+      get("/rides", RideConstroller, :index)
+      post("/ride/:rideid/stop", RideConstroller, :stop)
+      post("/ride/:passengerid/:driverid", RideConstroller, :create)
     end
   end
 end
