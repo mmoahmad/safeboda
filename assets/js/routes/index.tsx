@@ -10,6 +10,7 @@ import ProtectedRoute from '../components/ProtectedRoute';
 const Dashboard = lazy(() => import('../pages/Dashboard'));
 const Drivers = lazy(() => import('../pages/Driver'));
 const Passengers = lazy(() => import('../pages/Passenger'));
+const Rides = lazy(() => import('../pages/Ride'));
 
 export const RoutesHOC = (routes: any, defaultPath: any) => {
   const Routes: FunctionComponent<any> = (props: any) => (
@@ -46,6 +47,13 @@ export const DashboardRoutes = {
     component: Passengers,
     isProtected: true,
     showInMenu: 'Passengers'
+  },
+  RIDE: {
+    path: '/rides',
+    name: 'Rides',
+    component: Rides,
+    isProtected: true,
+    showInMenu: 'Rides'
   },
   MAIN: {
     path: '/',

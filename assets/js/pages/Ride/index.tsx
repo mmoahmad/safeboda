@@ -5,33 +5,33 @@ import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import { DashboardRoutes } from '../../routes';
-import { suspendDriver, unSuspendDriver, getDrivers } from './ducks/actions';
+import { stopRide, unSuspendRide, getRides } from './ducks/actions';
 import './styles.css';
 import NoDataIndication from '../../components/NoDataIndication';
 import { Alert } from 'react-bootstrap';
 import { BorderedButton } from '../../elements/Button';
-import CreateDriver from './CreateDriver';
+import CreateRide from './CreateRide';
 
 const { SearchBar, ClearSearchButton } = Search;
 
-interface IDrivers {
-  getDrivers: Function
-  suspendDriver: Function
-  unSuspendDriver: Function
+interface IRides {
+  getRides: Function
+  stopRide: Function
+  unSuspendRide: Function
 }
 
-const Drivers: FunctionComponent<IDrivers> = ({ getDrivers, suspendDriver, unSuspendDriver }) => {
-  const [drivers, setDrivers] = useState([]);
+const Rides: FunctionComponent<IRides> = ({ getRides, stopRide, unSuspendRide }) => {
+  const [rides, setRides] = useState([]);
   const [error, setError] = useState('');
   const [showError, setShowError] = useState(false);
-  const [showDriverModal, setShowDriverModal] = useState(false);
+  const [showRideModal, setShowRideModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  const getDriversData = () => {
+  const getRidesData = () => {
     setIsLoading(true);
-    getDrivers()
+    getRides()
       .then((resp: any) => {
-        setDrivers(resp.drivers);
+        setRides(resp.rides);
         setIsLoading(false);
       })
       .catch((err: any) => {
@@ -39,17 +39,17 @@ const Drivers: FunctionComponent<IDrivers> = ({ getDrivers, suspendDriver, unSus
         return err;
       });
   };
-  useEffect(getDriversData, []);
+  useEffect(getRidesData, []);
 
   function handleSuspend(e: any, id: number) {
     e.preventDefault();
     setIsLoading(true);
-    suspendDriver(id)
+    stopRide(id)
       .then((resp: any) => {
-        setDrivers(resp.drivers);
+        setRides(resp.rides);
         setError(resp.error);
         resp.error && setShowError(true);
-        getDriversData();
+        getRidesData();
         setIsLoading(false);
       })
       .catch((err: any) => {
@@ -60,12 +60,12 @@ const Drivers: FunctionComponent<IDrivers> = ({ getDrivers, suspendDriver, unSus
   function handleUnSuspend(e: any, id: number) {
     e.preventDefault();
     setIsLoading(true);
-    unSuspendDriver(id)
+    unSuspendRide(id)
       .then((resp: any) => {
-        setDrivers(resp.drivers);
+        setRides(resp.rides);
         setError(resp.error);
         resp.error && setShowError(true);
-        getDriversData();
+        getRidesData();
         setIsLoading(false);
       })
       .catch((err: any) => {
@@ -73,7 +73,7 @@ const Drivers: FunctionComponent<IDrivers> = ({ getDrivers, suspendDriver, unSus
       });
   }
 
-  function getDriversTableColumns() {
+  function getRidesTableColumns() {
     return [
       {
         dataField: 'id',
@@ -82,18 +82,18 @@ const Drivers: FunctionComponent<IDrivers> = ({ getDrivers, suspendDriver, unSus
         headerClasses: 'userid-header-class'
       },
       {
-        dataField: 'name',
-        text: 'Name',
+        dataField: 'passengerId',
+        text: 'Passenger ID',
         sort: true
       },
       {
-        dataField: 'phoneNumber',
-        text: 'Phone Number',
+        dataField: 'driverId',
+        text: 'Driver ID',
         sort: true
       },
       {
-        dataField: 'isSuspended',
-        text: 'Suspended',
+        dataField: 'status',
+        text: 'Status',
         sort: true
       },
       {
@@ -124,19 +124,19 @@ const Drivers: FunctionComponent<IDrivers> = ({ getDrivers, suspendDriver, unSus
     <ErrorBoundary>
       <Breadcrumb>
         <Breadcrumb.Item href={DashboardRoutes.MAIN.path}>Home</Breadcrumb.Item>
-        <Breadcrumb.Item active>Driver</Breadcrumb.Item>
+        <Breadcrumb.Item active>Ride</Breadcrumb.Item>
       </Breadcrumb>
       {showError && (
         <Alert onClose={() => setShowError(false)} dismissible variant='danger'>
           {error}
         </Alert>
       )}
-      <h2>Driver</h2>
+      <h2>Ride</h2>
 
       <ToolkitProvider
         keyField="id"
-        data={drivers || []}
-        columns={getDriversTableColumns()}
+        data={rides || []}
+        columns={getRidesTableColumns()}
         search
       >
         {
@@ -145,12 +145,12 @@ const Drivers: FunctionComponent<IDrivers> = ({ getDrivers, suspendDriver, unSus
               <BorderedButton
                 type='button'
                 className='float mr-2'
-                onClick={() => setShowDriverModal(true)}
+                onClick={() => setShowRideModal(true)}
               >
-                Create Driver
+                Create Ride
               </BorderedButton>
               <ClearSearchButton className="float-right ml-1 border" {...props.searchProps} />
-              <SearchBar {...props.searchProps} tableId="drivers" />
+              <SearchBar {...props.searchProps} tableId="rides" />
               <BootstrapTable
                 {...props.baseProps}
                 noDataIndication={() => <NoDataIndication loading={isLoading} />}
@@ -161,10 +161,10 @@ const Drivers: FunctionComponent<IDrivers> = ({ getDrivers, suspendDriver, unSus
         }
       </ToolkitProvider>
 
-      <CreateDriver
-        showDriverModal={showDriverModal}
-        closeDriverModal={() => setShowDriverModal(false)}
-        getDriversData={getDriversData}
+      <CreateRide
+        showRideModal={showRideModal}
+        closeRideModal={() => setShowRideModal(false)}
+        getRidesData={getRidesData}
       />
     </ErrorBoundary>
   );
@@ -172,10 +172,9 @@ const Drivers: FunctionComponent<IDrivers> = ({ getDrivers, suspendDriver, unSus
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getDrivers: () => dispatch(getDrivers()),
-    suspendDriver: (id: number) => dispatch(suspendDriver(id)),
-    unSuspendDriver: (id: number) => dispatch(unSuspendDriver(id))
+    getRides: () => dispatch(getRides()),
+    stopRide: (id: number) => dispatch(stopRide(id))
   };
 };
 
-export default connect(null, mapDispatchToProps)(Drivers);
+export default connect(null, mapDispatchToProps)(Rides);

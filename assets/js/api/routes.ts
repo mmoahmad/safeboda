@@ -6,10 +6,12 @@ const ROUTES_OBJ = {
   login: `${API_BASE_PATH}/login`,
   getDrivers: `${API_BASE_PATH}/drivers`,
   createDriver: `${API_BASE_PATH}/driver`,
-  deleteDriver: `${API_BASE_PATH}/driver/<id>/delete`,
   suspendDriver: `${API_BASE_PATH}/driver/<id>/suspend`,
   getPassengers: `${API_BASE_PATH}/passengers`,
   createPassenger: `${API_BASE_PATH}/passenger`,
+  getRides: `${API_BASE_PATH}/rides`,
+  createRide: `${API_BASE_PATH}/ride/<driver_id>/<passenger_id>`,
+  stopRide: `${API_BASE_PATH}/ride/<id>/stop`,
 };
 
 export type ROUTES = keyof typeof ROUTES_OBJ;

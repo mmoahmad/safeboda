@@ -43,6 +43,17 @@ export const postRequest = (route: string, data = {}) => {
     });
 };
 
+export const deleteRequest = (route: string, data = {}) => {
+  return axios
+    .delete(route, data)
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      return failedResponse(error);
+    });
+};
+
 export const putRequest = (route: string, data = {}) => {
   return axios
     .put(route, data)

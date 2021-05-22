@@ -6,7 +6,6 @@ import Breadcrumb from 'react-bootstrap/Breadcrumb';
 import ErrorBoundary from '../../components/ErrorBoundary';
 import { DashboardRoutes } from '../../routes';
 import { getPassengers } from './ducks/actions';
-import { formatDateTime } from '../../utils/datetime';
 import './styles.css';
 import NoDataIndication from '../../components/NoDataIndication';
 import { Alert } from 'react-bootstrap';
@@ -31,7 +30,7 @@ const Passengers: FunctionComponent<IPassengers> = ({ getPassengers, deletePasse
     setIsLoading(true);
     getPassengers()
       .then((resp: any) => {
-        setPassengers(resp.result);
+        setPassengers(resp.passengers);
         setIsLoading(false);
       })
       .catch((err: any) => {
@@ -40,22 +39,6 @@ const Passengers: FunctionComponent<IPassengers> = ({ getPassengers, deletePasse
       });
   };
   useEffect(getPassengersData, []);
-
-  function handleDelete(e: any, id: number) {
-    e.preventDefault();
-    setIsLoading(true);
-    deletePassenger(id)
-      .then((resp: any) => {
-        setPassengers(resp.result);
-        setError(resp.error);
-        resp.error && setShowError(true);
-        getPassengersData();
-        setIsLoading(false);
-      })
-      .catch((err: any) => {
-        return err;
-      });
-  }
 
   function getPassengersTableColumns() {
     return [
@@ -71,36 +54,9 @@ const Passengers: FunctionComponent<IPassengers> = ({ getPassengers, deletePasse
         sort: true
       },
       {
-        dataField: 'phone_number',
+        dataField: 'phoneNumber',
         text: 'Phone Number',
         sort: true
-      },
-      {
-        dataField: 'is_suspended',
-        text: 'Suspended',
-        sort: true
-      },
-      {
-        dataField: 'inserted_at',
-        text: 'Inserted At',
-        formatter: formatDateTime,
-        sort: true,
-        headerClasses: 'email-header-class'
-      },
-      {
-        dataField: 'df1',
-        text: 'Actions',
-        isDummyField: true,
-        headerClasses: 'username-header-class',
-        formatter: (cellContent: any, row: any) => {
-          return (
-            <>
-              <a href="#" onClick={event => {
-                handleDelete(event, row.id);
-              }}>Delete</a>
-            </>
-          );
-        }
       }
     ];
   }
@@ -157,8 +113,7 @@ const Passengers: FunctionComponent<IPassengers> = ({ getPassengers, deletePasse
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getPassengers: () => dispatch(getPassengers()),
-    deletePassenger: (id: number) => dispatch(deletePassenger(id))
+    getPassengers: () => dispatch(getPassengers())
   };
 };
 

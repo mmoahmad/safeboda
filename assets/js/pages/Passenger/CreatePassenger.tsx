@@ -17,8 +17,8 @@ interface ICreatePassenger {
 }
 
 const validation = Yup.object({
-  name: Yup.string().required('Entry fee should not be empty.'),
-  phone_number: Yup.string().required('Transaction fee should not be empty.')
+  name: Yup.string().required('Name should not be empty.'),
+  phone_number: Yup.string().required('Phone number should not be empty.')
 });
 
 const CreatePassenger: FunctionComponent<ICreatePassenger> = ({ createPassenger, closePassengerModal, showPassengerModal, getPassengersData }) => {
