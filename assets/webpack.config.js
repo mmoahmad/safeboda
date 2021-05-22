@@ -28,11 +28,16 @@ module.exports = (env, options) => {
     module: {
       rules: [
         {
-          test: /\.js$/,
+          test: /\.(j|t)sx?$/,
           exclude: /node_modules/,
-          use: {
-            loader: 'babel-loader'
-          }
+          use: [
+            {
+              loader: 'babel-loader'
+            },
+            {
+              loader: "ts-loader"
+            }
+          ]
         },
         {
           test: /\.[s]?css$/,
@@ -48,6 +53,9 @@ module.exports = (env, options) => {
       new MiniCssExtractPlugin({ filename: '../css/app.css' }),
       new CopyWebpackPlugin([{ from: 'static/', to: '../' }])
     ]
-    .concat(devMode ? [new HardSourceWebpackPlugin()] : [])
+      .concat(devMode ? [new HardSourceWebpackPlugin()] : []),
+    resolve: {
+      extensions: [".ts", ".tsx", ".js", ".jsx"]
+    }
   }
 };

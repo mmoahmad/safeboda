@@ -18,7 +18,7 @@ defmodule SafebodaWeb.Router do
   scope "/", SafebodaWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    get "/*path", PageController, :index
   end
 
   # Other scopes may use custom stacks.
@@ -41,7 +41,7 @@ defmodule SafebodaWeb.Router do
       live_dashboard "/dashboard", metrics: SafebodaWeb.Telemetry
     end
 
-    scope "/api/v1", SafebodaWeb do
+    scope "/api", SafebodaWeb do
       pipe_through :api
 
       post("/driver", DriverController, :create)
