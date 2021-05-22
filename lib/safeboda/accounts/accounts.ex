@@ -20,10 +20,11 @@ defmodule Safeboda.Accounts do
 
   ## Examples
 
-      iex> get_driver!(123)
+      iex> get_driver(123)
       %Driver{}
+      nil
   """
-  def get_driver!(driver_id), do: Repo.get!(Driver, driver_id)
+  def get_driver(driver_id), do: Repo.get(Driver, driver_id)
 
   @doc """
   Creates a driver.
@@ -40,6 +41,15 @@ defmodule Safeboda.Accounts do
     |> Repo.insert()
   end
 
+  @doc """
+  Updates a driver.
+
+  ## Examples
+
+      iex> update_driver(attrs)
+      {:ok, %Driver{}}
+      {:error, %Ecto.Changeset{}}
+  """
   def update_driver(%Driver{} = driver, attr \\ %{}) do
     driver
     |> Driver.update_changeset(attr)
@@ -102,7 +112,7 @@ defmodule Safeboda.Accounts do
     query =
       from r in Ride,
         where:
-          r.driver_id == ^driver_id or (r.passenger_id == ^passenger_id and r.status == "ongoing")
+          (r.driver_id == ^driver_id or r.passenger_id == ^passenger_id) and r.status == "ongoing"
 
     Repo.exists?(query)
   end

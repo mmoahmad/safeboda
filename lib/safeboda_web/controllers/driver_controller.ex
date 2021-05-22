@@ -3,7 +3,7 @@ defmodule SafebodaWeb.DriverController do
 
   alias Safeboda.Accounts
   alias Safeboda.Accounts.Driver
-  alias Safeboda.Common.Util
+  alias Safeboda.Common.{Util, ErrorResponse}
 
   def index(conn, _params) do
     drivers = Accounts.list_drivers()
@@ -19,7 +19,7 @@ defmodule SafebodaWeb.DriverController do
     case Accounts.create_driver(params) do
       {:ok, %Driver{} = driver} ->
         conn
-        |> put_status(:created)
+        |> put_status(200)
         |> json(%{success: true, driver: Driver.to_json(driver)})
 
       {:error, changeset} ->
@@ -27,23 +27,20 @@ defmodule SafebodaWeb.DriverController do
 
         conn
         |> put_status(400)
-        |> json(%{success: false, driver: %{}})
+        |> json(%{success: false, errors: ErrorResponse.render_errors(changeset)})
     end
   end
 
   def suspend(conn, %{"driverid" => driver_id}) do
-    IO.puts("suspend func")
-    driver = Accounts.get_driver!(driver_id)
-
-    case Accounts.update_driver(driver, %{"is_suspended" => true}) do
-      {:ok, %Driver{}} ->
-        conn
-        |> put_status(204)
-        |> json(%{success: true})
-
-      {:error, changeset} ->
-        IO.inspect(changeset)
-
+    with(
+      %Driver{} = driver <- Accounts.get_driver(driver_id),
+      {:ok, %Driver{}} <- Accounts.update_driver(driver, %{is_suspended: true})
+    ) do
+      conn
+      |> Plug.Conn.send_resp(204, [])
+      |> Plug.Conn.halt()
+    else
+      _ ->
         conn
         |> put_status(400)
         |> json(%{success: false})
@@ -51,18 +48,15 @@ defmodule SafebodaWeb.DriverController do
   end
 
   def unsuspend(conn, %{"driverid" => driver_id}) do
-    IO.puts("unsuspend func")
-    driver = Accounts.get_driver!(driver_id)
-
-    case Accounts.update_driver(driver, %{"is_suspended" => false}) do
-      {:ok, %Driver{}} ->
-        conn
-        |> put_status(204)
-        |> json(%{success: true})
-
-      {:error, changeset} ->
-        IO.inspect(changeset)
-
+    with(
+      %Driver{} = driver <- Accounts.get_driver(driver_id),
+      {:ok, %Driver{}} <- Accounts.update_driver(driver, %{is_suspended: false})
+    ) do
+      conn
+      |> Plug.Conn.send_resp(204, [])
+      |> Plug.Conn.halt()
+    else
+      _ ->
         conn
         |> put_status(400)
         |> json(%{success: false})

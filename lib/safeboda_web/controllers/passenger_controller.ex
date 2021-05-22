@@ -3,7 +3,7 @@ defmodule SafebodaWeb.PassengerController do
 
   alias Safeboda.Accounts
   alias Safeboda.Accounts.Passenger
-  alias Safeboda.Common.Util
+  alias Safeboda.Common.{Util, ErrorResponse}
 
   def index(conn, _params) do
     passengers = Accounts.list_passengers()
@@ -27,7 +27,7 @@ defmodule SafebodaWeb.PassengerController do
 
         conn
         |> put_status(400)
-        |> json(%{success: false, passenger: %{}})
+        |> json(%{success: false, errors: ErrorResponse.render_errors(changeset)})
     end
   end
 end
