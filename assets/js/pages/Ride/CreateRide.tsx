@@ -8,6 +8,7 @@ import { FilledButton, BorderedButton } from '../../elements/Button';
 import { createRide, getDrivers, getPassengers } from './ducks/actions';
 
 const successNotification = 'Ride has been successfully created.';
+const errorNotification = 'Passenger or already driver have an ongoing ride.';
 
 interface ICreateRide {
   createRide: Function;
@@ -49,7 +50,7 @@ const CreateRide: FunctionComponent<ICreateRide> = ({ createRide, closeRideModal
   const getDriversData = () => {
     getDrivers()
       .then((resp: any) => {
-        setDrivers((resp.drivers || []).map((v: any) => {
+        setDrivers((resp.drivers || []).filter((d: any) => { return !d.isSuspended }).map((v: any) => {
           return { value: v.name, key: v.id }
         }));
         setIsLoading(false);
@@ -95,7 +96,10 @@ const CreateRide: FunctionComponent<ICreateRide> = ({ createRide, closeRideModal
         handleSuccessMsg(successNotification);
       })
       .catch((err: any) => {
+        console.log(err)
         setIsLoading(false);
+        setShow(true);
+        handleErrorMsg(errorNotification);
         return err;
       });
   };

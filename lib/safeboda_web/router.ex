@@ -18,6 +18,7 @@ defmodule SafebodaWeb.Router do
   scope "/", SafebodaWeb do
     pipe_through :browser
 
+    get "/", PageController, :index
     get "/login", PageController, :index
     get "/drivers", PageController, :index
     get "/passengers", PageController, :index
