@@ -94,7 +94,8 @@ defmodule Safeboda.Accounts do
   def list_ongoing_rides() do
     query =
       from r in Ride,
-        where: r.status == "ongoing"
+        where: r.status == "ongoing",
+        preload: [:driver, :passenger]
 
     Repo.all(query)
   end
@@ -147,7 +148,7 @@ defmodule Safeboda.Accounts do
       {:ok, %Ride{}}
       nil
   """
-  def get_ride(ride_id), do: Repo.get(Ride, ride_id)
+  def get_ride(ride_id), do: Repo.get(Ride, ride_id) |> Repo.preload([:driver, :passenger])
 
   @doc """
   update a ride.

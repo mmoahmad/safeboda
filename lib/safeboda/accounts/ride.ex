@@ -2,6 +2,8 @@ defmodule Safeboda.Accounts.Ride do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Safeboda.Accounts.{Driver, Passenger}
+
   schema "rides" do
     field :pick_up_latitude, :decimal
     field :pick_up_longitude, :decimal
@@ -51,14 +53,22 @@ defmodule Safeboda.Accounts.Ride do
 
   def to_json(%__MODULE__{
         id: id,
-        driver_id: driver_id,
-        passenger_id: passenger_id,
+        driver: driver,
+        passenger: passenger,
+        pick_up_latitude: pick_up_latitude,
+        pick_up_longitude: pick_up_longitude,
+        destination_latitude: destination_latitude,
+        destination_longitude: destination_longitude,
         status: status
       }) do
     %{
       id: id,
-      driverId: driver_id,
-      passengerId: passenger_id,
+      driver: Driver.to_json(driver),
+      passenger: Passenger.to_json(passenger),
+      pickUpLatitude: pick_up_latitude,
+      pickUpLongitude: pick_up_longitude,
+      destinationLatitude: destination_latitude,
+      destinationLongitude: destination_longitude,
       status: status
     }
   end
