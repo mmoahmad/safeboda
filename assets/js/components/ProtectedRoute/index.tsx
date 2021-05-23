@@ -11,13 +11,13 @@ interface IProtectedRoute {
 
 const ProtectedRoute: FunctionComponent<IProtectedRoute> = ({ path, component, isProtected }) => {
   if (isProtected) {
-    if (!isLoggedIn()) {
+    if (isLoggedIn()) {
       return <Route path={path} component={component} />;
     } else {
       return <Redirect to={{ pathname: '/login' }} />;
     }
   } else {
-    if (!isLoggedIn()) {
+    if (isLoggedIn()) {
       return <Redirect to={{ pathname: '/' }} />;
     } else {
       return <Route path={path} component={component} />;

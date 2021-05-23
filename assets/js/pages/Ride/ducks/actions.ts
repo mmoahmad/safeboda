@@ -17,7 +17,7 @@ export const getPassengers = () => async (dispatch: any, getState: any) => {
   return getRequest(`${getRoute('getPassengers')}`);
 };
 
-export const createRide = (data: {}, passenger_id: number, driver_id: number) => async (dispatch: any, getState: any) => {
+export const createRide = (data: {}, driver_id: number, passenger_id: number) => async (dispatch: any, getState: any) => {
   setAuthToken(getUserToken());
   return postRequest(`${getRoute('createRide', {passenger_id, driver_id})}`, data);
 };

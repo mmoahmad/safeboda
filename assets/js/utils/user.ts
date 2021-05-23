@@ -3,7 +3,7 @@ import { COOKIE_USER_TOKEN_FIELD } from '../config';
 
 export function setUserToken(payload: any) {
   const cookies = new Cookies();
-  cookies.set(COOKIE_USER_TOKEN_FIELD, payload.data.jwt, { path: '/' });
+  cookies.set(COOKIE_USER_TOKEN_FIELD, payload.data.token, { path: '/' });
 }
 
 export function getUserToken() {

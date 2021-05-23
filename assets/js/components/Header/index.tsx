@@ -11,10 +11,7 @@ import {
 } from './style';
 import { connect } from 'react-redux';
 
-/**
- * Header is a template top navigation bar of user layout
- */
-const Header = (props: any) => {
+const Header = () => {
   return (
     <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
       <Navbar.Brand>
@@ -34,11 +31,9 @@ const Header = (props: any) => {
         <Nav>
           <UserDropDown alignRight id='userDropDown' className='dropdown-menu-right' title={[
             (<Navbar.Text className="mr-1" key="title" style={{ color: 'white' }}>
-              {`${props.user.first_name} ${props.user.last_name}`}
+              Admin
             </Navbar.Text>),
-            props.user.image
-              ? (<CustomImage key="icon" className='border rounded-circle' src={props.user.image} />)
-              : (<FontAwesomeIcon key="icon" icon={faUserCircle} title='' />)
+            (<FontAwesomeIcon key="icon" icon={faUserCircle} title='' />)
           ]}>
             <NavDropdown.Item href={AppRoutes.LOGOUT.path}>
               <NavDropdown.ItemText>Logout</NavDropdown.ItemText>

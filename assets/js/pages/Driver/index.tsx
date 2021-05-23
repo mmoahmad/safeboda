@@ -107,7 +107,7 @@ const Drivers: FunctionComponent<IDrivers> = ({ getDrivers, suspendDriver, unSus
             {row.isSuspended ? 
               <a href="#" onClick={event => {
                 handleUnSuspend(event, row.id);
-              }}>Un Suspend</a>
+              }}>Unsuspend</a>
               :
               <a href="#" onClick={event => {
                 handleSuspend(event, row.id);

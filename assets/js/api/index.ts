@@ -71,8 +71,3 @@ export const authenticateUser = (email: string, password: string) => {
   return postRequest(route, data);
 };
 
-export const getUserInfo = (userId: number) => {
-  const route = getRoute('userProfile', { userId });
-  return getRequest(route);
-};
-

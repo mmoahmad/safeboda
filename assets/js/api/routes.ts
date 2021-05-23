@@ -3,7 +3,7 @@ import replace from 'lodash/replace';
 import { API_BASE_PATH } from '../config';
 
 const ROUTES_OBJ = {
-  login: `${API_BASE_PATH}/login`,
+  login: `${API_BASE_PATH}/users/signin`,
   getDrivers: `${API_BASE_PATH}/drivers`,
   createDriver: `${API_BASE_PATH}/driver`,
   suspendDriver: `${API_BASE_PATH}/driver/<id>/suspend`,

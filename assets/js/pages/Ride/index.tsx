@@ -11,7 +11,7 @@ import NoDataIndication from '../../components/NoDataIndication';
 import { Alert } from 'react-bootstrap';
 import { BorderedButton } from '../../elements/Button';
 import haversine from 'haversine-distance';
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import CreateRide from './CreateRide';
 
 const { SearchBar, ClearSearchButton } = Search;

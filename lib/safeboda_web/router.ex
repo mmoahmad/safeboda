@@ -20,6 +20,7 @@ defmodule SafebodaWeb.Router do
 
     get "/", PageController, :index
     get "/login", PageController, :index
+    get "/logout", PageController, :index
     get "/drivers", PageController, :index
     get "/passengers", PageController, :index
     get "/rides", PageController, :index

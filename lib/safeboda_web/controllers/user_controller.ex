@@ -35,6 +35,11 @@ defmodule SafebodaWeb.UserController do
       |> put_status(200)
       |> json(%{success: true, token: token, user: User.to_json(user)})
     else
+      {:error, :not_found} ->
+        conn
+        |> put_status(404)
+        |> json(%{success: false, errors: "User not found with these credentials!"})
+
       {:error, :unauthorized} ->
         conn
         |> put_status(401)
