@@ -1,0 +1,380 @@
+{
+	"info": {
+		"_postman_id": "bdfb34bd-14bb-47be-b19e-96ac76b8cb84",
+		"name": "Safeboda",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "drivers",
+			"item": [
+				{
+					"name": "create driver",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJzYWZlYm9kYSIsImV4cCI6MTYyNDIwNTAxOSwiaWF0IjoxNjIxNzg1ODE5LCJpc3MiOiJzYWZlYm9kYSIsImp0aSI6ImU0NTBiZmUyLTNmODUtNGZmNy1iNDliLTIwMDA5Yjk1MTE4ZiIsIm5iZiI6MTYyMTc4NTgxOCwic3ViIjoiMSIsInR5cCI6ImFjY2VzcyJ9.JFGrxzpcR8DdRCZnPYqkhyaU4LIHrMxXQg6A4JKDpOEG9tg-nu7yJ5xRUyzjp6hw7ZfDDdwqpv96ql5VgUJPpQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Andy\",\n    \"phoneNumber\": \"03224567892\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/driver",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"driver"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list drivers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJzYWZlYm9kYSIsImV4cCI6MTYyNDIwNTAxOSwiaWF0IjoxNjIxNzg1ODE5LCJpc3MiOiJzYWZlYm9kYSIsImp0aSI6ImU0NTBiZmUyLTNmODUtNGZmNy1iNDliLTIwMDA5Yjk1MTE4ZiIsIm5iZiI6MTYyMTc4NTgxOCwic3ViIjoiMSIsInR5cCI6ImFjY2VzcyJ9.JFGrxzpcR8DdRCZnPYqkhyaU4LIHrMxXQg6A4JKDpOEG9tg-nu7yJ5xRUyzjp6hw7ZfDDdwqpv96ql5VgUJPpQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/drivers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"drivers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "suspend driver",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJzYWZlYm9kYSIsImV4cCI6MTYyNDIwNTAxOSwiaWF0IjoxNjIxNzg1ODE5LCJpc3MiOiJzYWZlYm9kYSIsImp0aSI6ImU0NTBiZmUyLTNmODUtNGZmNy1iNDliLTIwMDA5Yjk1MTE4ZiIsIm5iZiI6MTYyMTc4NTgxOCwic3ViIjoiMSIsInR5cCI6ImFjY2VzcyJ9.JFGrxzpcR8DdRCZnPYqkhyaU4LIHrMxXQg6A4JKDpOEG9tg-nu7yJ5xRUyzjp6hw7ZfDDdwqpv96ql5VgUJPpQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/driver/1/suspend",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"driver",
+								"1",
+								"suspend"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "un-suspend driver",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJzYWZlYm9kYSIsImV4cCI6MTYyNDIwNTAxOSwiaWF0IjoxNjIxNzg1ODE5LCJpc3MiOiJzYWZlYm9kYSIsImp0aSI6ImU0NTBiZmUyLTNmODUtNGZmNy1iNDliLTIwMDA5Yjk1MTE4ZiIsIm5iZiI6MTYyMTc4NTgxOCwic3ViIjoiMSIsInR5cCI6ImFjY2VzcyJ9.JFGrxzpcR8DdRCZnPYqkhyaU4LIHrMxXQg6A4JKDpOEG9tg-nu7yJ5xRUyzjp6hw7ZfDDdwqpv96ql5VgUJPpQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/driver/1/suspend",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"driver",
+								"1",
+								"suspend"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "passengers",
+			"item": [
+				{
+					"name": "create passenger",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJzYWZlYm9kYSIsImV4cCI6MTYyNDIwNTAxOSwiaWF0IjoxNjIxNzg1ODE5LCJpc3MiOiJzYWZlYm9kYSIsImp0aSI6ImU0NTBiZmUyLTNmODUtNGZmNy1iNDliLTIwMDA5Yjk1MTE4ZiIsIm5iZiI6MTYyMTc4NTgxOCwic3ViIjoiMSIsInR5cCI6ImFjY2VzcyJ9.JFGrxzpcR8DdRCZnPYqkhyaU4LIHrMxXQg6A4JKDpOEG9tg-nu7yJ5xRUyzjp6hw7ZfDDdwqpv96ql5VgUJPpQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Mariya\",\n    \"phoneNumber\": \"03224348676\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/passenger",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"passenger"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list passengers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJzYWZlYm9kYSIsImV4cCI6MTYyNDIwNTAxOSwiaWF0IjoxNjIxNzg1ODE5LCJpc3MiOiJzYWZlYm9kYSIsImp0aSI6ImU0NTBiZmUyLTNmODUtNGZmNy1iNDliLTIwMDA5Yjk1MTE4ZiIsIm5iZiI6MTYyMTc4NTgxOCwic3ViIjoiMSIsInR5cCI6ImFjY2VzcyJ9.JFGrxzpcR8DdRCZnPYqkhyaU4LIHrMxXQg6A4JKDpOEG9tg-nu7yJ5xRUyzjp6hw7ZfDDdwqpv96ql5VgUJPpQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/passengers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"passengers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "rides",
+			"item": [
+				{
+					"name": "list ongoing rides",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJzYWZlYm9kYSIsImV4cCI6MTYyNDIwNTAxOSwiaWF0IjoxNjIxNzg1ODE5LCJpc3MiOiJzYWZlYm9kYSIsImp0aSI6ImU0NTBiZmUyLTNmODUtNGZmNy1iNDliLTIwMDA5Yjk1MTE4ZiIsIm5iZiI6MTYyMTc4NTgxOCwic3ViIjoiMSIsInR5cCI6ImFjY2VzcyJ9.JFGrxzpcR8DdRCZnPYqkhyaU4LIHrMxXQg6A4JKDpOEG9tg-nu7yJ5xRUyzjp6hw7ZfDDdwqpv96ql5VgUJPpQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:4000/api/rides",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"rides"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create ride",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJzYWZlYm9kYSIsImV4cCI6MTYyNDIwNTAxOSwiaWF0IjoxNjIxNzg1ODE5LCJpc3MiOiJzYWZlYm9kYSIsImp0aSI6ImU0NTBiZmUyLTNmODUtNGZmNy1iNDliLTIwMDA5Yjk1MTE4ZiIsIm5iZiI6MTYyMTc4NTgxOCwic3ViIjoiMSIsInR5cCI6ImFjY2VzcyJ9.JFGrxzpcR8DdRCZnPYqkhyaU4LIHrMxXQg6A4JKDpOEG9tg-nu7yJ5xRUyzjp6hw7ZfDDdwqpv96ql5VgUJPpQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"pickUpLatitude\": 12.233453,\n    \"pickUpLongitude\": 12.234223,\n    \"destinationLatitude\": 12.456789,\n    \"destinationLongitude\": 13.214357\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/ride/1/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"ride",
+								"1",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "stop ride",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJzYWZlYm9kYSIsImV4cCI6MTYyNDIwNTAxOSwiaWF0IjoxNjIxNzg1ODE5LCJpc3MiOiJzYWZlYm9kYSIsImp0aSI6ImU0NTBiZmUyLTNmODUtNGZmNy1iNDliLTIwMDA5Yjk1MTE4ZiIsIm5iZiI6MTYyMTc4NTgxOCwic3ViIjoiMSIsInR5cCI6ImFjY2VzcyJ9.JFGrxzpcR8DdRCZnPYqkhyaU4LIHrMxXQg6A4JKDpOEG9tg-nu7yJ5xRUyzjp6hw7ZfDDdwqpv96ql5VgUJPpQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/ride/2/stop",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"ride",
+								"2",
+								"stop"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "sign-in",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@safeboda.com\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/users/signin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"users",
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sign-up",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJidXNpX2FwaSIsImV4cCI6MTYyNDE5Njc1OSwiaWF0IjoxNjIxNzc3NTU5LCJpc3MiOiJidXNpX2FwaSIsImp0aSI6ImUyY2U2MTIwLTEzM2QtNDhhNy1hZDE4LTk0NTQ4ZTdiOWRkMCIsIm5iZiI6MTYyMTc3NzU1OCwic3ViIjoiMiIsInR5cCI6ImFjY2VzcyJ9.jHYLcU1mFfn9ea164SBJzUZp5oUKXe_zkyJF1VoV3BTm04Jdk7XkJzCgwI53UBWep74rTuL1ISZqar1MtND1Xg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": {\n        \"email\": \"user2@safeboda.com\",\n        \"password\": \"password\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/users/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
