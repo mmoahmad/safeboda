@@ -45,8 +45,20 @@ defmodule SafebodaWeb.Router do
       # live_dashboard "/dashboard", metrics: SafebodaWeb.Telemetry
     end
 
+    pipeline :auth do
+      plug SafebodaWeb.Auth.Pipeline
+    end
+
     scope "/api", SafebodaWeb do
       pipe_through :api
+
+      # user routes
+      post "/users/signup", UserController, :create
+      post "/users/signin", UserController, :signin
+    end
+
+    scope "/api", SafebodaWeb do
+      pipe_through [:api, :auth]
 
       # driver routes
       get("/drivers", DriverController, :index)

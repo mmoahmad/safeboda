@@ -32,3 +32,8 @@ import_config "#{Mix.env()}.exs"
 
 # basic auth
 config :safeboda, :basic_auth, username: "admin@safeboda.com", password: "secret"
+
+# Guardian
+config :safeboda, SafebodaWeb.Auth.Guardian,
+  issuer: "safeboda",
+  secret_key: "yRERYFwlwdEDqOJWHVb5k6EdXy9Qze9yMJ+08I7pm7qSpjX1lcNw9ynhKyiXCmg0"
